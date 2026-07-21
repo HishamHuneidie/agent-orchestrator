@@ -1,6 +1,10 @@
 
-
-
+# IDE files
 /.idea
-/docs/client-docs
-/docs/features
+
+# App documentation
+/docs/client-docs/*
+/docs/features/*
+
+# Repos
+/repos/*
