@@ -1,3 +1,8 @@
+---
+name: code-review
+description: Review repository changes for defects, regressions, missing tests and contract violations before delivery.
+---
+
 # code-review
 
 ## Trigger

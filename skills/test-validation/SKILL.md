@@ -1,3 +1,8 @@
+---
+name: test-validation
+description: Validate completed changes with the appropriate structure, contract, security and test commands before delivery.
+---
+
 # test-validation
 
 ## Trigger

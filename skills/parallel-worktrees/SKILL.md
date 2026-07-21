@@ -1,3 +1,8 @@
+---
+name: parallel-worktrees
+description: Decide when and how to create, use and clean up task worktrees for parallel or high-conflict work.
+---
+
 # parallel-worktrees
 
 ## Trigger

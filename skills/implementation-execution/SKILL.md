@@ -1,3 +1,8 @@
+---
+name: implementation-execution
+description: Implement an approved task contract using the matching agent responsibilities, repository constraints and validation gates.
+---
+
 # implementation-execution
 
 ## Trigger

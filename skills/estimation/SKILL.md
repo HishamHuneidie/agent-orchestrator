@@ -1,3 +1,8 @@
+---
+name: estimation
+description: Estimate implementation tasks, effort, risk, dependencies and worktree strategy from feature context.
+---
+
 # estimation
 
 ## Trigger

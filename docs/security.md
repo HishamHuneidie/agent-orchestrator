@@ -17,3 +17,5 @@ Secret handling rules:
 - Agents must never request, summarize, copy or transform secret material.
 
 Restricted paths include `.env`, env variants, credential files, certificates, keys, token files and internal runtime control directories such as `.git`, `.agents` and `.codex`.
+
+Exception: `.agents/skills` is allowed as the repository-local Codex skill discovery path. It must contain only skill folders or a symlink to `skills/`; other `.agents` paths remain restricted.

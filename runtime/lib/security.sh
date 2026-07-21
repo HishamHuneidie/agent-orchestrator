@@ -4,6 +4,9 @@ set -eu
 is_denied_path() {
   path=$1
   case "$path" in
+    .agents/skills|.agents/skills/*)
+      return 1
+      ;;
     .env|*.env|*/.env|*/.env.*|*secret*|*token*|*credential*|*.pem|*.key|*.p12|*.crt|*id_rsa*|*id_ed25519*|.git/*|.agents/*|.codex/*)
       return 0
       ;;

@@ -1,3 +1,8 @@
+---
+name: application-feature-orchestration
+description: Orchestrate an application feature end to end from request intake through planning, implementation, review, validation and delivery.
+---
+
 # application-feature-orchestration
 
 ## Trigger

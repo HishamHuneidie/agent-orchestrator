@@ -1,3 +1,8 @@
+---
+name: feature-planning-shortcut
+description: Use when the user sends $feat {feature_name} to plan a feature from docs without implementing it.
+---
+
 # feature-planning-shortcut
 
 ## Trigger

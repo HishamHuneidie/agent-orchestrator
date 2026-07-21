@@ -1,3 +1,8 @@
+---
+name: delivery-summary
+description: Close completed work with a concise delivery summary, validation evidence, changed files and residual risks.
+---
+
 # delivery-summary
 
 ## Trigger

@@ -1,3 +1,8 @@
+---
+name: feature-from-docs
+description: Analyze non-secret feature documentation and extract objective, scope, acceptance criteria, constraints and risks.
+---
+
 # feature-from-docs
 
 ## Trigger

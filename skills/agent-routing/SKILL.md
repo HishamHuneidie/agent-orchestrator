@@ -1,3 +1,8 @@
+---
+name: agent-routing
+description: Select the right repository agent profile and handoff path for planned feature or task work.
+---
+
 # agent-routing
 
 ## Trigger

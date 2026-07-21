@@ -90,9 +90,12 @@ Seguir la politica de minimo privilegio definida en `orchestrator.yaml` y `docs/
 
 No leer, copiar, resumir ni transformar material secreto. Rutas denegadas incluyen `.env`, variantes de env, archivos con `secret`, `token` o `credential`, certificados, claves privadas, `.git/`, `.agents/` y `.codex/`.
 
+Excepcion: `.agents/skills` esta permitido como ruta local de descubrimiento de skills de Codex. Debe contener solo carpetas de skills o un enlace simbolico a `skills/`; el resto de `.agents/` sigue denegado.
+
 No escribir fuera de las raices permitidas por el proyecto sin una razon explicita. Las raices normales de trabajo son:
 
 - `agents/`
+- `.agents/skills`
 - `briefs/`
 - `contracts/`
 - `docs/`

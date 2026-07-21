@@ -1,3 +1,8 @@
+---
+name: task-delivery-shortcut
+description: Use when the user sends $task {task_id} to implement, review, validate and deliver a planned task.
+---
+
 # task-delivery-shortcut
 
 ## Trigger
