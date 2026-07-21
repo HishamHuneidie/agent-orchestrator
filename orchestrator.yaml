@@ -1,0 +1,343 @@
+version: 2
+name: markdown-agent-orchestrator
+description: Portable production-ready orchestrator for multi-agent application delivery.
+
+compatibility:
+  supports_v1_contracts: true
+  default_contract_version: "2.0"
+  legacy_scripts_supported: true
+
+runtime:
+  entrypoint: ./orchestrator
+  state_dir: runtime/state
+  prompt_dir: runtime/prompts
+  reports_dir: reports
+  observability_dir: observability
+  default_command: run
+
+parallelism:
+  max_parallel_implementers: 3
+  max_parallel_reviewers: 2
+  default_mode: sequential
+
+worktrees:
+  root: worktrees
+  naming: "{feature_id}/{task_id}"
+  required_when:
+    - parallel_implementation
+    - high_conflict_risk
+  recommended_when:
+    - large_change
+    - cross_module_change
+    - unknown_test_impact
+  disabled_for:
+    - documentation
+    - planning
+    - review_only
+
+security:
+  classification_levels:
+    - public
+    - internal
+    - restricted
+    - secret
+  default_classification: internal
+  minimum_privilege: true
+  deny_secret_material: true
+  denied_path_patterns:
+    - ".env"
+    - "*.env"
+    - "**/.env.*"
+    - "**/*secret*"
+    - "**/*token*"
+    - "**/*credential*"
+    - "**/*.pem"
+    - "**/*.key"
+    - "**/*.p12"
+    - "**/*.crt"
+    - "**/id_rsa*"
+    - "**/id_ed25519*"
+  denied_content_patterns:
+    - "AKIA[0-9A-Z]{16}"
+    - "-----BEGIN (RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----"
+    - "(?i)(api[_-]?key|secret|token|password)\\s*[:=]\\s*['\\\"]?[A-Za-z0-9_./+=-]{12,}"
+  writable_roots:
+    - agents
+    - briefs
+    - contracts
+    - docs
+    - hooks
+    - observability
+    - reports
+    - runtime
+    - schemas
+    - scripts
+    - skills
+    - tasks
+    - templates
+    - workflows
+  prohibited_roots:
+    - .git
+    - .agents
+    - .codex
+
+cost_policy:
+  currency: USD
+  max_cost_per_task: 2.00
+  max_cost_per_feature: 15.00
+  require_cost_record: true
+
+token_policy:
+  max_prompt_tokens_default: 120000
+  max_output_tokens_default: 16000
+  trim_strategy: least_relevant_context_first
+
+time_policy:
+  default_task_timeout_seconds: 1800
+  default_hook_timeout_seconds: 120
+
+retry_policy:
+  default_max_retries: 1
+  retryable_errors:
+    - transient_tool_failure
+    - schema_validation_failure
+    - missing_noncritical_context
+  non_retryable_errors:
+    - security_violation
+    - permission_denied
+    - secret_detected
+
+observability:
+  enabled: true
+  execution_log: observability/executions.jsonl
+  metrics_log: observability/metrics.jsonl
+  error_log: observability/errors.jsonl
+  record_tools: true
+  record_files: true
+  record_cost: true
+  aggregate_metrics:
+    - average_task_duration
+    - cost_per_task
+    - cost_per_feature
+    - agent_performance
+    - model_performance
+    - frequent_errors
+    - bottlenecks
+    - acceptance_coverage
+    - test_coverage
+
+logging:
+  level: info
+  redact_secrets: true
+  include_stack_traces: false
+
+tool_selection:
+  dynamic: true
+  default_allowed_tools:
+    - read_file
+    - write_allowed_file
+    - validate_schema
+    - scan_secrets
+    - run_validation_command
+  default_denied_tools:
+    - read_secret
+    - write_secret
+    - destructive_shell
+    - external_network
+
+prompt_builder:
+  template: templates/prompt.md
+  output_dir: runtime/prompts
+  sections:
+    - brief
+    - prompt
+    - skill
+    - context
+    - restrictions
+    - permissions
+    - tools
+
+models:
+  orchestrator:
+    recommended: gpt-5
+    alternatives: [gpt-5-thinking, gpt-5-mini]
+    reasoning: high
+    creativity: low
+    max_context_tokens: 200000
+    timeout_seconds: 900
+    expected_cost: medium
+  feature-analyst:
+    recommended: gpt-5
+    alternatives: [gpt-5-mini, gpt-5-thinking]
+    reasoning: medium
+    creativity: medium
+    max_context_tokens: 120000
+    timeout_seconds: 600
+    expected_cost: low
+  estimator:
+    recommended: gpt-5
+    alternatives: [gpt-5-mini, gpt-5-thinking]
+    reasoning: high
+    creativity: low
+    max_context_tokens: 120000
+    timeout_seconds: 480
+    expected_cost: low
+  implementation-planner:
+    recommended: gpt-5
+    alternatives: [gpt-5-thinking, gpt-5-mini]
+    reasoning: high
+    creativity: low
+    max_context_tokens: 160000
+    timeout_seconds: 720
+    expected_cost: medium
+  backend-engineer:
+    recommended: gpt-5
+    alternatives: [gpt-5-thinking, gpt-5-mini]
+    reasoning: high
+    creativity: low
+    max_context_tokens: 200000
+    timeout_seconds: 1500
+    expected_cost: medium-high
+  frontend-engineer:
+    recommended: gpt-5
+    alternatives: [gpt-5-mini, gpt-5-thinking]
+    reasoning: medium-high
+    creativity: medium
+    max_context_tokens: 160000
+    timeout_seconds: 1500
+    expected_cost: medium
+  fullstack-engineer:
+    recommended: gpt-5
+    alternatives: [gpt-5-thinking, gpt-5-mini]
+    reasoning: high
+    creativity: low-medium
+    max_context_tokens: 200000
+    timeout_seconds: 1800
+    expected_cost: medium-high
+  code-reviewer:
+    recommended: gpt-5-thinking
+    alternatives: [gpt-5, gpt-5-mini]
+    reasoning: high
+    creativity: low
+    max_context_tokens: 200000
+    timeout_seconds: 900
+    expected_cost: medium
+  unit-test-engineer:
+    recommended: gpt-5-mini
+    alternatives: [gpt-5, gpt-5-thinking]
+    reasoning: medium
+    creativity: low
+    max_context_tokens: 120000
+    timeout_seconds: 1200
+    expected_cost: low-medium
+  e2e-test-engineer:
+    recommended: gpt-5
+    alternatives: [gpt-5-mini, gpt-5-thinking]
+    reasoning: medium-high
+    creativity: low
+    max_context_tokens: 160000
+    timeout_seconds: 1800
+    expected_cost: medium
+  qa-verifier:
+    recommended: gpt-5
+    alternatives: [gpt-5-mini, gpt-5-thinking]
+    reasoning: medium-high
+    creativity: low
+    max_context_tokens: 120000
+    timeout_seconds: 900
+    expected_cost: low-medium
+  delivery-summarizer:
+    recommended: gpt-5-mini
+    alternatives: [gpt-5]
+    reasoning: low-medium
+    creativity: low
+    max_context_tokens: 80000
+    timeout_seconds: 480
+    expected_cost: low
+
+agent_permissions:
+  default:
+    can_read:
+      - orchestrator.yaml
+      - agents/**
+      - skills/**
+      - schemas/**
+      - templates/**
+      - docs/**
+      - briefs/**
+      - tasks/**
+    can_write:
+      - runtime/state/**
+      - runtime/prompts/**
+      - observability/**
+      - reports/**
+    restricted:
+      - .env
+      - "*.env"
+      - "**/*secret*"
+      - "**/*token*"
+      - "**/*credential*"
+      - "**/*.pem"
+      - "**/*.key"
+    prohibited:
+      - .git/**
+      - .agents/**
+      - .codex/**
+
+phases:
+  - id: intake
+    agent: orchestrator
+    hook: runtime/hooks/pre-orchestration.sh
+    output: feature-request.yaml
+  - id: feature_analysis
+    agent: feature-analyst
+    skill: skills/feature-from-docs/SKILL.md
+    output: briefs/{feature_id}/brief.yaml
+  - id: estimation
+    agent: estimator
+    skill: skills/estimation/SKILL.md
+  - id: planning
+    agent: implementation-planner
+    output: tasks/{feature_id}/execution-plan.yaml
+  - id: routing
+    agent: orchestrator
+    skill: skills/agent-routing/SKILL.md
+  - id: implementation
+    agents: [backend-engineer, frontend-engineer, fullstack-engineer]
+    skill: skills/implementation-execution/SKILL.md
+    hook: runtime/hooks/pre-agent-dispatch.sh
+  - id: review
+    agent: code-reviewer
+    hook: runtime/hooks/pre-review.sh
+    output: reports/{feature_id}/review-report.md
+  - id: test
+    agents: [unit-test-engineer, e2e-test-engineer, qa-verifier]
+    hook: runtime/hooks/pre-test.sh
+    output: reports/{feature_id}/test-report.md
+  - id: delivery
+    agent: delivery-summarizer
+    hook: runtime/hooks/post-delivery.sh
+    output: reports/{feature_id}/delivery-summary.md
+
+agent_selection:
+  backend-engineer:
+    choose_for: [api, database, auth, jobs, integrations, server_logic]
+  frontend-engineer:
+    choose_for: [ui, ux, client_state, accessibility, responsive_layout]
+  fullstack-engineer:
+    choose_for: [small_cross_stack_change, simple_feature, glue_code]
+  unit-test-engineer:
+    choose_for: [pure_logic, services, components, adapters]
+  e2e-test-engineer:
+    choose_for: [critical_user_flow, browser_flow, regression_path]
+  qa-verifier:
+    choose_for: [acceptance_criteria, edge_cases, release_readiness]
+
+quality_gates:
+  require_acceptance_criteria: true
+  require_validation_commands: true
+  require_schema_validation: true
+  require_secret_scan: true
+  require_review_before_delivery: true
+  require_test_report_before_delivery: true
+  reject_invalid_contracts: true

@@ -1,0 +1,35 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, commands, result]
+properties:
+  feature_id:
+    type: string
+  commands:
+    type: array
+    items:
+      type: object
+      required: [command, outcome]
+      properties:
+        command:
+          type: string
+        outcome:
+          type: string
+          enum: [passed, failed, skipped, blocked]
+        notes:
+          type: string
+  failures:
+    type: array
+    items:
+      type: string
+  observed_coverage:
+    type: array
+    items:
+      type: string
+  gaps:
+    type: array
+    items:
+      type: string
+  result:
+    type: string
+    enum: [passed, passed_with_gaps, failed, blocked]

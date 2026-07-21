@@ -1,0 +1,20 @@
+contract_version: "2.0"
+feature_id: example-feature
+phases:
+  - id: intake
+    agent: orchestrator
+    status: complete
+  - id: implementation
+    agent: fullstack-engineer
+    status: pending
+tasks:
+  - task_id: example-task
+    state: pending
+    assigned_agent: fullstack-engineer
+    dependencies: []
+    worktree: ""
+    retries: 0
+    success_criteria:
+      - "Acceptance criterion is implemented."
+validation_commands:
+  - scripts/validate-structure.sh

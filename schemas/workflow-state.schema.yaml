@@ -1,0 +1,35 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, state, nodes, history]
+properties:
+  feature_id:
+    type: string
+  state:
+    type: string
+    enum: [pending, running, waiting, failed, cancelled, completed]
+  nodes:
+    type: array
+    items:
+      type: object
+      required: [id, state, dependencies]
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+          enum: [pending, running, waiting, failed, cancelled, completed]
+        dependencies:
+          type: array
+          items:
+            type: string
+        retries:
+          type: integer
+        history:
+          type: array
+          items:
+            type: object
+  history:
+    type: array
+    items:
+      type: object

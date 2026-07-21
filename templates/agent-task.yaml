@@ -1,0 +1,28 @@
+contract_version: "2.0"
+feature_id: example-feature
+task_id: example-task
+state: pending
+history: []
+dependencies: []
+priority: medium
+risk: medium
+assigned_agent: fullstack-engineer
+responsible: fullstack-engineer
+inputs:
+  - templates/feature-request.yaml
+  - templates/execution-plan.yaml
+expected_files:
+  - path/to/file
+success_criteria:
+  - "The assigned behavior works and is validated."
+validation_commands:
+  - "run project-specific tests"
+worktree: ""
+metrics:
+  duration_ms: 0
+  tokens: 0
+  cost: 0
+artifacts: []
+retries: 0
+logs: []
+handoff: code-reviewer

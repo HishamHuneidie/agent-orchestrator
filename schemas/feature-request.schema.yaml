@@ -1,0 +1,33 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, objective, source_docs, acceptance_criteria]
+properties:
+  feature_id:
+    type: string
+  objective:
+    type: string
+  source_docs:
+    type: array
+    items:
+      type: string
+  user_personas:
+    type: array
+    items:
+      type: string
+  acceptance_criteria:
+    type: array
+    items:
+      type: string
+  constraints:
+    type: array
+    items:
+      type: string
+  out_of_scope:
+    type: array
+    items:
+      type: string
+  open_questions:
+    type: array
+    items:
+      type: string

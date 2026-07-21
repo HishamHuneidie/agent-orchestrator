@@ -1,0 +1,31 @@
+.
+├── README.md
+├── orchestrator
+├── orchestrator.yaml
+├── agents/
+├── briefs/
+├── contracts/
+├── docs/
+│   ├── diagrams/
+│   ├── architecture-refactor-report.md
+│   ├── architecture.md
+│   ├── observability.md
+│   ├── prompt-builder.md
+│   ├── security.md
+│   └── workflow-engine.md
+├── hooks/
+├── observability/
+├── reports/
+├── runtime/
+│   ├── engine.sh
+│   ├── hooks/
+│   ├── lib/
+│   ├── prompts/
+│   └── state/
+├── schemas/
+├── scripts/
+├── skills/
+├── tasks/
+├── templates/
+├── workflows/
+└── tree.example

@@ -1,0 +1,28 @@
+contract_version: "2.0"
+feature_id: "{{feature_id}}"
+task_id: "{{task_id}}"
+state: pending
+history:
+  - ts: "{{created_at}}"
+    event: created
+dependencies: []
+priority: medium
+risk: medium
+assigned_agent: fullstack-engineer
+responsible: fullstack-engineer
+inputs:
+  - briefs/{{feature_id}}/brief.yaml
+expected_files: []
+success_criteria:
+  - "Task output satisfies the assigned brief."
+validation_commands:
+  - scripts/validate-structure.sh
+worktree: ""
+metrics:
+  duration_ms: 0
+  tokens: 0
+  cost: 0
+artifacts: []
+retries: 0
+logs: []
+handoff: code-reviewer

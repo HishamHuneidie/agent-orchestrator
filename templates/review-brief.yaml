@@ -1,0 +1,31 @@
+brief_version: "2.0"
+feature_id: "{{feature_id}}"
+brief_type: review
+objective: "{{objective}}"
+context:
+  - "{{context}}"
+scope:
+  - "{{review_scope_item}}"
+out_of_scope:
+  - "{{out_of_scope_item}}"
+constraints:
+  - "{{constraint}}"
+risks:
+  - "{{risk}}"
+dependencies:
+  - "{{dependency}}"
+involved_files:
+  - "{{path}}"
+acceptance_criteria:
+  - "{{acceptance_criterion}}"
+validations:
+  - "{{validation_command}}"
+definition_of_done:
+  - "{{done_condition}}"
+known_risks:
+  - "{{known_risk}}"
+deliverables:
+  - "{{deliverable}}"
+priority: medium
+specialization:
+  review_focus: ["correctness", "security", "regression", "tests"]

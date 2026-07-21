@@ -1,0 +1,37 @@
+version: "2.0"
+classification: internal
+type: object
+required: [ts, event, feature_id, status]
+properties:
+  ts:
+    type: string
+  event:
+    type: string
+  feature_id:
+    type: string
+  task_id:
+    type: string
+  status:
+    type: string
+  agent:
+    type: string
+  model:
+    type: string
+  duration_ms:
+    type: integer
+  tokens:
+    type: integer
+  cost:
+    type: number
+  tools:
+    type: array
+    items:
+      type: string
+  files_modified:
+    type: array
+    items:
+      type: string
+  errors:
+    type: array
+    items:
+      type: string

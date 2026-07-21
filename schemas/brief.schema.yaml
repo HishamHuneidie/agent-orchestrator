@@ -1,0 +1,84 @@
+version: "2.0"
+classification: internal
+type: object
+required:
+  - brief_version
+  - feature_id
+  - brief_type
+  - objective
+  - context
+  - scope
+  - out_of_scope
+  - constraints
+  - risks
+  - dependencies
+  - involved_files
+  - acceptance_criteria
+  - validations
+  - definition_of_done
+  - known_risks
+  - deliverables
+  - priority
+properties:
+  brief_version:
+    type: string
+  feature_id:
+    type: string
+  brief_type:
+    type: string
+    enum: [common, backend, frontend, qa, review]
+  objective:
+    type: string
+  context:
+    type: array
+    items:
+      type: string
+  scope:
+    type: array
+    items:
+      type: string
+  out_of_scope:
+    type: array
+    items:
+      type: string
+  constraints:
+    type: array
+    items:
+      type: string
+  risks:
+    type: array
+    items:
+      type: string
+  dependencies:
+    type: array
+    items:
+      type: string
+  involved_files:
+    type: array
+    items:
+      type: string
+  acceptance_criteria:
+    type: array
+    items:
+      type: string
+  validations:
+    type: array
+    items:
+      type: string
+  definition_of_done:
+    type: array
+    items:
+      type: string
+  known_risks:
+    type: array
+    items:
+      type: string
+  deliverables:
+    type: array
+    items:
+      type: string
+  priority:
+    type: string
+    enum: [low, medium, high, critical]
+  specialization:
+    type: object

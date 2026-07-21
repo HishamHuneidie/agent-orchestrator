@@ -1,0 +1,27 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, task_id, agent, brief, prompt, skill, context, permissions]
+properties:
+  feature_id:
+    type: string
+  task_id:
+    type: string
+  agent:
+    type: string
+  brief:
+    type: string
+  prompt:
+    type: string
+  skill:
+    type: string
+  context:
+    type: array
+    items:
+      type: string
+  permissions:
+    type: object
+  restrictions:
+    type: array
+    items:
+      type: string

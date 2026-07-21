@@ -1,0 +1,47 @@
+contract_version: "2.0"
+feature_id: "{{feature_id}}"
+state: pending
+nodes:
+  - id: intake
+    state: pending
+    dependencies: []
+    retries: 0
+    history: []
+  - id: feature_analysis
+    state: pending
+    dependencies: [intake]
+    retries: 0
+    history: []
+  - id: estimation
+    state: pending
+    dependencies: [feature_analysis]
+    retries: 0
+    history: []
+  - id: planning
+    state: pending
+    dependencies: [estimation]
+    retries: 0
+    history: []
+  - id: implementation
+    state: pending
+    dependencies: [planning]
+    retries: 0
+    history: []
+  - id: review
+    state: pending
+    dependencies: [implementation]
+    retries: 0
+    history: []
+  - id: test
+    state: pending
+    dependencies: [review]
+    retries: 0
+    history: []
+  - id: delivery
+    state: pending
+    dependencies: [test]
+    retries: 0
+    history: []
+history:
+  - ts: "{{created_at}}"
+    event: created

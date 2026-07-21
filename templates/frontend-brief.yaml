@@ -1,0 +1,33 @@
+brief_version: "2.0"
+feature_id: "{{feature_id}}"
+brief_type: frontend
+objective: "{{objective}}"
+context:
+  - "{{context}}"
+scope:
+  - "{{frontend_scope_item}}"
+out_of_scope:
+  - "{{out_of_scope_item}}"
+constraints:
+  - "{{constraint}}"
+risks:
+  - "{{risk}}"
+dependencies:
+  - "{{dependency}}"
+involved_files:
+  - "{{frontend_path}}"
+acceptance_criteria:
+  - "{{acceptance_criterion}}"
+validations:
+  - "{{frontend_validation_command}}"
+definition_of_done:
+  - "{{done_condition}}"
+known_risks:
+  - "{{known_risk}}"
+deliverables:
+  - "{{deliverable}}"
+priority: medium
+specialization:
+  framework: "{{framework}}"
+  state_management: "{{state_management}}"
+  test_style: "{{test_style}}"

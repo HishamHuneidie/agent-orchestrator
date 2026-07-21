@@ -1,0 +1,15 @@
+contract_version: "2.0"
+feature_id: example-feature
+objective: "Describe the user-visible outcome."
+source_docs:
+  - docs/product-spec.md
+user_personas:
+  - primary_user
+acceptance_criteria:
+  - "Given context, when action happens, then expected result occurs."
+constraints:
+  - "Use existing architecture and validation commands."
+out_of_scope:
+  - "Items intentionally excluded from this delivery."
+open_questions:
+  - "Questions that must be resolved before implementation."

@@ -1,0 +1,26 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, changes, validation, risks, final_decision]
+properties:
+  feature_id:
+    type: string
+  changes:
+    type: array
+    items:
+      type: string
+  validation:
+    type: array
+    items:
+      type: string
+  risks:
+    type: array
+    items:
+      type: string
+  pending:
+    type: array
+    items:
+      type: string
+  final_decision:
+    type: string
+    enum: [delivered, delivered_with_risks, blocked]

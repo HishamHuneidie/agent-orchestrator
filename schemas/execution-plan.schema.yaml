@@ -1,0 +1,48 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, phases, tasks, validation_commands]
+properties:
+  feature_id:
+    type: string
+  phases:
+    type: array
+    items:
+      type: object
+      required: [id, agent, status]
+      properties:
+        id:
+          type: string
+        agent:
+          type: string
+        status:
+          type: string
+  tasks:
+    type: array
+    items:
+      type: object
+      required: [task_id, assigned_agent, dependencies, success_criteria]
+      properties:
+        task_id:
+          type: string
+        assigned_agent:
+          type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+        worktree:
+          type: string
+        success_criteria:
+          type: array
+          items:
+            type: string
+        state:
+          type: string
+          enum: [pending, running, waiting, failed, cancelled, completed]
+        retries:
+          type: integer
+  validation_commands:
+    type: array
+    items:
+      type: string

@@ -1,0 +1,33 @@
+version: "2.0"
+classification: internal
+type: object
+required: [feature_id, reviewer, recommendation, findings]
+properties:
+  feature_id:
+    type: string
+  reviewer:
+    type: string
+  recommendation:
+    type: string
+    enum: [approve, approve_with_risks, request_changes]
+  findings:
+    type: array
+    items:
+      type: object
+      required: [severity, summary]
+      properties:
+        severity:
+          type: string
+          enum: [critical, high, medium, low]
+        file:
+          type: string
+        line:
+          type: integer
+        summary:
+          type: string
+        recommendation:
+          type: string
+  risks:
+    type: array
+    items:
+      type: string
