@@ -2,7 +2,7 @@
 
 ## Tipo
 
-Stateful workflow definition for the orchestrator runtime.
+Stateful workflow definition for AI Agent. The active AI client executes this workflow after loading `./skills`.
 
 ## Estados de nodo
 
@@ -32,11 +32,11 @@ Stateful workflow definition for the orchestrator runtime.
 - Un nodo puede pasar a `failed` cuando falla un hook, schema, permiso, secreto o validacion.
 - Un nodo puede reintentarse solo si `retry_policy` lo permite.
 - Un nodo pasa a `cancelled` cuando se agotan reintentos o el orquestador cancela la feature.
-- Todo cambio de estado debe persistirse en `runtime/state/<feature-id>.yaml`.
+- Todo cambio de estado debe persistirse en `runtime/state/<feature-id>.yaml` cuando el cliente use estado persistente.
 
 ## Paralelismo
 
-El runtime puede ejecutar nodos independientes en paralelo hasta los limites de `orchestrator.yaml`. Las tareas de implementacion paralela requieren worktree.
+El cliente IA puede ejecutar nodos independientes en paralelo hasta los limites de `orchestrator.yaml`. Las tareas de implementacion paralela requieren worktree.
 
 ## Recuperación y reanudación
 

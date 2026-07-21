@@ -11,16 +11,18 @@ Node states:
 - `cancelled`
 - `completed`
 
-Engine responsibilities:
+The workflow engine is a client-side contract executed by the AI Client after loading `./skills`. The shell CLI validates and prepares support artifacts, but it does not start workflow execution from an execution name.
+
+Client responsibilities:
 
 - Load configuration.
 - Load or create workflow state.
 - Resolve dependencies.
-- Dispatch eligible nodes.
+- Route eligible nodes to the proper agent contract.
 - Enforce parallelism.
 - Execute hooks.
 - Retry recoverable failures.
 - Persist history.
 - Resume from state.
 
-The v2 runtime initializes and validates these states. Full provider-backed subagent execution is intentionally left behind the engine boundary.
+The v2 runtime validates package structure. Full workflow execution is intentionally kept inside the active AI client boundary.

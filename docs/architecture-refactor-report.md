@@ -68,7 +68,7 @@ Capas:
 - `runtime/lib/schema.sh`: validacion conservadora de contratos.
 - `runtime/lib/observability.sh`: metricas.
 - `runtime/hooks/*.sh`: hooks ejecutables.
-- `scripts/build-prompt.sh`: Prompt Builder.
+- Prompt artifacts are assembled by the active AI client when a workflow needs them.
 - `scripts/security-scan.sh`: escaneo manual de secretos.
 - `scripts/validate-contract.sh`: validacion manual de contratos.
 - `schemas/brief.schema.yaml`, `prompt.schema.yaml`, `workflow-state.schema.yaml`, `observability-event.schema.yaml`.
@@ -110,11 +110,11 @@ Ver `docs/diagrams/prompt-builder.md`.
 5. Agregar hooks ejecutables en paralelo a hooks Markdown.
 6. Activar validacion de estructura, permisos y secretos en hooks.
 7. Agregar prompt builder y generar prompts renderizados por task.
-8. Introducir runtime CLI con `orchestrator run` y `orchestrator task`.
+8. Introducir CLI de soporte con `orchestrator init-client` y `validate`.
 9. Registrar observabilidad en JSONL.
 10. Convertir workflows a maquinas de estado reanudables.
-11. Agregar integracion real con proveedores de modelos detras del runtime.
-12. Deprecar gradualmente scripts manuales solo cuando existan alternativas runtime equivalentes.
+11. Ejecutar workflows desde el cliente de IA cargando las skills locales.
+12. Deprecar gradualmente scripts manuales solo cuando existan alternativas equivalentes dentro del cliente IA.
 
 ## Decisiones Arquitectonicas
 

@@ -2,7 +2,7 @@
 
 ## Tipo
 
-Stateful workflow definition for the orchestrator runtime.
+Stateful workflow definition for AI Agent after loading `./skills`.
 
 ## Estados de nodo
 

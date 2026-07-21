@@ -39,6 +39,7 @@ for file in \
   agents/orchestrator.md \
   agents/qa-verifier.md \
   agents/unit-test-engineer.md \
+  docs/ai-client-orchestration.md \
   docs/agent-lifecycle.md \
   docs/architecture.md \
   docs/architecture-refactor-report.md \
@@ -78,7 +79,6 @@ for file in \
   runtime/lib/observability.sh \
   runtime/lib/schema.sh \
   runtime/lib/security.sh \
-  scripts/build-prompt.sh \
   scripts/cleanup-worktree.sh \
   scripts/create-worktree.sh \
   scripts/orchestrate.sh \
@@ -86,12 +86,15 @@ for file in \
   scripts/validate-contract.sh \
   scripts/validate-structure.sh \
   skills/agent-routing/SKILL.md \
+  skills/application-feature-orchestration/SKILL.md \
   skills/code-review/SKILL.md \
   skills/delivery-summary/SKILL.md \
   skills/estimation/SKILL.md \
   skills/feature-from-docs/SKILL.md \
+  skills/feature-planning-shortcut/SKILL.md \
   skills/implementation-execution/SKILL.md \
   skills/parallel-worktrees/SKILL.md \
+  skills/task-delivery-shortcut/SKILL.md \
   skills/test-validation/SKILL.md \
   templates/agent-task.yaml \
   templates/backend-brief.yaml \
@@ -109,8 +112,10 @@ for file in \
   templates/workflow-state.yaml \
   workflows/application-feature.md \
   workflows/delivery-summary.md \
+  workflows/feature-planning.md \
   workflows/parallel-implementation.md \
-  workflows/review-and-test.md; do
+  workflows/review-and-test.md \
+  workflows/task-delivery.md; do
   require_file "$file"
 done
 

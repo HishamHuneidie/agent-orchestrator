@@ -2,19 +2,17 @@
 
 Sistema portable de orquestacion de agentes para convertir documentacion de producto en features implementables, planes de ejecucion, tareas asignables, revisiones, pruebas y resumen de entrega.
 
-La version actual conserva la filosofia Markdown/YAML/shell, pero agrega runtime CLI, hooks ejecutables, seguridad, observabilidad, schemas versionados, Task como entidad principal, briefs estandarizados y Prompt Builder.
+La version actual conserva la filosofia Markdown/YAML/shell, pero mueve la orquestacion efectiva al cliente de IA activo: El CLI queda como utilidad de soporte para bootstrap y validacion.
 
 ## Flujo Principal
 
-1. Leer documentacion fuente y completar `templates/feature-request.yaml`.
-2. Extraer features, criterios de aceptacion, restricciones y fuera de alcance.
-3. Estimar complejidad, riesgo, dependencias y tamano.
-4. Crear `templates/execution-plan.yaml` para fases, tareas, agentes y validaciones.
-5. Seleccionar agentes desde `agents/` usando `skills/agent-routing/SKILL.md`.
-6. Decidir uso de worktrees segun riesgo y paralelismo.
-7. Ejecutar implementacion con contratos de tarea.
-8. Revisar codigo, ejecutar pruebas unitarias, e2e y QA.
-9. Cerrar con `templates/delivery-summary.md`.
+1. Escribir `$feat {feature_name}` en el cliente de IA para leer `docs/features/{feature_name}/`.
+2. Extraer alcance, criterios de aceptacion, restricciones, riesgos y fuera de alcance.
+3. Estimar complejidad, dependencias y tiempos.
+4. Crear briefs, plan de ejecucion y contratos de tarea sin implementar codigo.
+5. Escribir `$task {task_id}` para implementar una tarea planificada.
+6. Revisar codigo, ejecutar pruebas unitarias, e2e y QA.
+7. Cerrar con `templates/delivery-summary.md`.
 
 ## Uso Rapido
 
@@ -23,19 +21,23 @@ scripts/validate-structure.sh
 scripts/orchestrate.sh templates/feature-request.yaml
 ```
 
-Runtime v2:
+Bootstrap para clientes IA:
 
 ```sh
 ./orchestrator validate
-./orchestrator run FEATURE_ID
-./orchestrator task FEATURE_ID TASK_ID
+./orchestrator init-client
 ```
 
-Prompt Builder:
+Despues de abrir el repositorio en el cliente de IA, cargar `AGENTS.md`, las skills de `./skills` y el workflow aplicable de `./workflows`. Una peticion como `implementa esta feature` debe activar `skills/application-feature-orchestration/SKILL.md` y `workflows/application-feature.md`.
 
-```sh
-./orchestrator build-prompt FEATURE_ID TASK_ID fullstack-engineer skills/implementation-execution/SKILL.md templates/brief.yaml docs/architecture.md
+Atajos principales dentro del cliente IA:
+
+```text
+$feat feature-login
+$task backend-auth-endpoint
 ```
+
+La ejecucion de workflows ocurre dentro del cliente IA.
 
 Para una tarea paralela con worktree:
 

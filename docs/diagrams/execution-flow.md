@@ -3,8 +3,8 @@
 ```mermaid
 stateDiagram-v2
     [*] --> Pending
-    Pending --> Running: orchestrator run FEATURE_ID
-    Running --> Intake: pre-orchestration
+    Pending --> Running: Codex/ClaudeCode request
+    Running --> Intake: load ./skills and pre-orchestration
     Intake --> FeatureAnalysis: feature-from-docs
     FeatureAnalysis --> Estimation: estimation
     Estimation --> Planning: execution-plan

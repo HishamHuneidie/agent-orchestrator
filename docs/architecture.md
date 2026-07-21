@@ -2,7 +2,7 @@
 
 The orchestrator is a file-based control plane. Markdown files describe agent behavior and workflows; YAML files define machine-readable contracts; shell scripts provide minimal validation and worktree helpers.
 
-No runtime agent scheduler is included in v1. A human or CLI-driven orchestrator reads `orchestrator.yaml`, fills templates and dispatches work using the agent and skill instructions.
+No shell runtime agent scheduler is included. AI Agents reads `orchestrator.yaml`, loads `./skills`, fills templates and dispatches work using the agent and workflow instructions.
 
 Core artifacts:
 

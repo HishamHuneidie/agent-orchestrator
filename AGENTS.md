@@ -16,7 +16,7 @@ Este repositorio contiene un sistema portable de orquestacion de agentes para de
 - `scripts/` contiene validadores y utilidades operativas.
 - `briefs/`, `tasks/`, `reports/` y `observability/` son artefactos de ejecucion.
 
-El proyecto no intenta ejecutar agentes automaticamente de punta a punta todavia. La CLI prepara estado, valida estructura, genera prompts y aplica hooks; la orquestacion efectiva sigue siendo explicita y basada en contratos.
+El proyecto no ejecuta agentes automaticamente desde un comando con nombre de ejecucion. La orquestacion efectiva ocurre dentro del cliente IA activo, como Codex o ClaudeCode, despues de cargar `AGENTS.md`, las skills de `./skills` y los workflows de `./workflows`. La CLI valida estructura e imprime bootstrap de cliente.
 
 ## Principios de trabajo
 
@@ -47,25 +47,13 @@ Validar un contrato concreto:
 scripts/validate-contract.sh <archivo>
 ```
 
-Inicializar runtime para una feature:
+Imprimir instrucciones de bootstrap para AI Agent:
 
 ```sh
-./orchestrator run <feature-id>
+./orchestrator init-client
 ```
 
-Preparar una tarea:
-
-```sh
-./orchestrator task <feature-id> <task-id>
-```
-
-Construir un prompt:
-
-```sh
-./orchestrator build-prompt <feature-id> <task-id> <agent> <skill-path> <brief-path>
-```
-
-Orquestacion manual legacy:
+Orquestacion manual de soporte:
 
 ```sh
 scripts/orchestrate.sh templates/feature-request.yaml
@@ -140,16 +128,18 @@ scripts/cleanup-worktree.sh <feature-id> <task-id>
 
 El flujo principal es:
 
-1. Completar `templates/feature-request.yaml`.
-2. Analizar documentacion con `skills/feature-from-docs/SKILL.md`.
-3. Estimar con `skills/estimation/SKILL.md`.
-4. Crear `templates/execution-plan.yaml`.
-5. Enrutar agentes con `skills/agent-routing/SKILL.md`.
-6. Preparar tareas y prompts.
-7. Ejecutar implementacion con `skills/implementation-execution/SKILL.md`.
-8. Revisar con `skills/code-review/SKILL.md`.
-9. Validar con `skills/test-validation/SKILL.md`.
-10. Cerrar con `skills/delivery-summary/SKILL.md` y `templates/delivery-summary.md`.
+1. Ante `$feat {feature_name}`, activar `skills/feature-planning-shortcut/SKILL.md`.
+2. Leer `docs/features/{feature_name}/README.md` y documentacion relacionada no secreta.
+3. Analizar documentacion con `skills/feature-from-docs/SKILL.md`.
+4. Estimar con `skills/estimation/SKILL.md`.
+5. Crear brief, `templates/execution-plan.yaml` y contratos de task sin implementar.
+6. Enrutar agentes con `skills/agent-routing/SKILL.md`.
+7. Ante `$task {task_id}`, activar `skills/task-delivery-shortcut/SKILL.md`.
+8. Buscar el contrato de task correspondiente y leer su brief.
+9. Ejecutar implementacion con `skills/implementation-execution/SKILL.md`.
+10. Revisar con `skills/code-review/SKILL.md`.
+11. Validar con `skills/test-validation/SKILL.md`.
+12. Cerrar con `skills/delivery-summary/SKILL.md` y `templates/delivery-summary.md`.
 
 Mantener la trazabilidad entre feature, tareas, reportes y eventos de observabilidad.
 

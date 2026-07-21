@@ -9,11 +9,29 @@ compatibility:
 
 runtime:
   entrypoint: ./orchestrator
+  mode: ai_client_orchestrated
+  supported_clients:
+    - codex
+    - claude-code
   state_dir: runtime/state
   prompt_dir: runtime/prompts
   reports_dir: reports
   observability_dir: observability
-  default_command: run
+  default_command: init-client
+  orchestration_entrypoints:
+    - trigger: "$feat {feature_name}"
+      workflow: workflows/feature-planning.md
+      skill: skills/feature-planning-shortcut/SKILL.md
+      source: docs/features/{feature_name}/README.md
+      implements_code: false
+    - trigger: "$task {task_id}"
+      workflow: workflows/task-delivery.md
+      skill: skills/task-delivery-shortcut/SKILL.md
+      task_lookup: tasks/**/{task_id}.yaml
+      implements_code: true
+    - trigger: "implementa esta feature"
+      workflow: workflows/application-feature.md
+      skill: skills/application-feature-orchestration/SKILL.md
 
 parallelism:
   max_parallel_implementers: 3

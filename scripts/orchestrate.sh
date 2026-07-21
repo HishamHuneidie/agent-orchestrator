@@ -12,7 +12,7 @@ fi
 scripts/validate-structure.sh
 
 cat <<EOF
-manual orchestration v1
+manual orchestration support
 
 input:
   feature_request: $request
@@ -28,5 +28,5 @@ flow:
   8. workflows/review-and-test.md
   9. templates/delivery-summary.md
 
-note: v1 prints and validates the expected flow; it does not invoke agents automatically.
+note: this script prints and validates the expected flow; it does not invoke agents automatically. Execute the workflow inside the AI Client after loading ./skills.
 EOF
